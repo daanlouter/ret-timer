@@ -10,7 +10,7 @@ app.options('*', cors());
 
 const port = process.env.PORT || 3000;
 
-var allowed_origins = ['http://localhost:8080'];
+var allowed_origins = ['http://localhost:8080', 'https://ret-vertrektijden.onrender.com/'];
 
 app.listen(port, () => console.log("Server running on port " + port));
 
@@ -20,7 +20,7 @@ app.use(cors({
 		if (!origin) return callback(null, true);
 
 		if (allowed_origins.indexOf(origin) === -1) {
-			var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+			var msg = 'The CORS policy for this site does not allow access from the specified Origin: ' + origin;
 			return callback(new Error(msg), false);
 	  	}
 		return callback(null, true);
