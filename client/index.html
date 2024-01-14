@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> 
+	<style>
+		body {
+			margin: 0;
+			font-family: "Inter", sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		#wrapper header {
+			padding: 20px;
+			font-size: 12px;
+		}
+		#wrapper header select {
+			font-size: 12px;
+		}
+		#wrapper main {
+			display: flex;
+			flex-direction: column;
+			row-gap: 1px;
+		}
+		.departure {
+			padding: 20px;
+			font-size: 12px;
+			background: #333;
+			position: relative;
+			color: #fff;
+		}
+		.departure .eta {
+			font-weight: bold;
+		}
+		.departure .vertrektijd {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+		}
+
+		.departure.bad { background: #9e3c3c; }
+		.departure.okay { background: #dd7745; }
+		.departure.good { background: #60754e; }
+	</style>
 </head>
 <body>
-    <h1>Hello world!</h1>
-    <script src="/script.js"></script>
+	<div id="wrapper">
+		<header>Vertrektijden van
+			<select>
+				<option>Perron 1</option>
+				<option>Perron 2</option>
+			</select>
+			op
+			<select>
+				<option>Metrostation Rijnhaven</option>
+				<option>Metrostation Stadhuis</option>
+			</select>
+		</header>
+		<main></main>
+	</div>
+	<script src="/script.js"></script>
 </body>
 </html>
