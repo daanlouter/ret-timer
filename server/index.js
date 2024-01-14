@@ -27,18 +27,18 @@ app.use(cors({
 	}
   }));
 
-app.get("/getTimes/:query", (req, res, next) => {
-	var query = req.params.query;
-	if (!query) res.send("Please provide a search query")
-	console.log("New request for:", query);
-	const PERRON = "1";
+app.get("/getTimes/:halte/:perron", (req, res) => {
+	var halte = req.params.halte;
+	var perron = req.params.perron || 1;
+	if (!halte || !perron) res.send("Please provide a halte and perron")
+	console.log("New request for:", halte, perron);
 
-	axios("https://9292.nl/rotterdam/" + query)
+	axios("https://9292.nl/rotterdam/" + halte)
 		.then((response, i) => {
 			const $ = cheerio.load(response.data);
 			const departures = $(".departures table tbody tr").filter((i, d) => {
 				const departure_perron = $(d).find("td[data-label='Perron'] span").text().trim();
-				return departure_perron === "Perron " + PERRON;
+				return departure_perron === "Perron " + perron;
 			})
 			const formatted_departures = [];
 			$(departures).each((i, d) => {
@@ -52,7 +52,10 @@ app.get("/getTimes/:query", (req, res, next) => {
 
 				formatted_departures.push({ normal_time, former_time, new_time });
 			})
-			console.log(formatted_departures);
+
 			res.send(formatted_departures)
-		});
+		})
+		.catch(err => {
+			res.send(err);
+		})
 });
